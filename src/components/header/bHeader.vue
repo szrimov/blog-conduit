@@ -44,7 +44,7 @@
             <router-link
               class="header__nav-item"
               active-class="active"
-              :to="{ name: 'home' }"
+              :to="{ name: 'main-feed' }"
               exact
               >Home</router-link
             >

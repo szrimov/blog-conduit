@@ -1,5 +1,8 @@
 <template>
-  <div class="profile-user-feed">
+  <div
+    class="profile-user-feed"
+    v-if="$store.state.profileFeed.articles.length"
+  >
     <BFeedItem
       v-for="article in $store.state.profileFeed.articles"
       :key="article.createdAt"
@@ -33,7 +36,10 @@ export default {
   },
   methods: {
     getArticlesFromProfileUserFeed(page) {
-      this.$store.dispatch("getProfileAuthorFeed", page);
+      this.$store.dispatch("getProfileAuthorFeed", {
+        page: page,
+        slug: this.$route.params.slug,
+      });
     },
     favoriteHandler({ favorited, slug }) {
       favorited

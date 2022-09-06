@@ -1,9 +1,9 @@
 <template>
-  <div class="tags">
+  <div class="tags" v-if="$store.state.tags.tags.length">
     <h6 class="tags__title">Popular tags</h6>
-    <template v-if="$store.state.tags.tags">
+    <template>
       <div class="tags__item" v-for="tag in $store.state.tags.tags" :key="tag">
-        <router-link :to="{ name: 'main-feed' }"> {{ tag }}</router-link>
+        <div @click="getTagsFeed(tag)">{{ tag }}</div>
       </div>
     </template>
   </div>
@@ -13,6 +13,12 @@
 export default {
   mounted() {
     this.$store.dispatch("getTags");
+  },
+  methods: {
+    getTagsFeed(tag) {
+      this.$store.dispatch("getTagsFeed", { page: 0, tag: tag });
+      this.$emit("setTag", tag);
+    },
   },
 };
 </script>
@@ -26,6 +32,7 @@ export default {
   height: 200px;
   padding: 10px;
   background: #f3f3f3;
+  border-radius: 5px;
 }
 .tags__title {
   font-size: 1rem;
@@ -39,8 +46,7 @@ export default {
   padding: 5px 10px;
   margin-top: 5px;
   margin-right: 5px;
-}
-.tags__item a {
   color: #fff;
+  cursor: pointer;
 }
 </style>

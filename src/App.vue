@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <BHeader />
-    <router-view></router-view>
+    <router-view :key="$route.fullPath"></router-view>
   </div>
 </template>
 
@@ -9,6 +9,9 @@
 import BHeader from "./components/header/bHeader.vue";
 export default {
   components: { BHeader },
+  data() {
+    return {};
+  },
 
   mounted() {
     this.$store.dispatch("getCurrentUser");

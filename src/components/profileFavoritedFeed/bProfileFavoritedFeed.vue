@@ -1,5 +1,8 @@
 <template>
-  <div class="profile-favorited">
+  <div
+    class="profile-favorited"
+    v-if="$store.state.profileFeed.articles.length"
+  >
     <BFeedItem
       v-for="article in $store.state.profileFeed.articles"
       :key="article.createdAt"

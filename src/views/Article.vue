@@ -1,122 +1,143 @@
 <template>
-  <div class="article" v-if="Object.keys($store.state.article.article).length">
-    <div class="article__header">
-      <div class="container">
-        <h1 class="article__title">{{ $store.state.article.article.title }}</h1>
-        <div class="article__info-group">
-          <img
-            :src="$store.state.article.article.author.image"
-            alt="user-image"
-            class="article__user-image"
-          />
-          <div class="article__info">
-            <h6 class="article__username">
-              {{ $store.state.article.article.author.username }}
-            </h6>
-            <p class="article__created-at">
-              {{ $store.state.article.article.createdAt }}
-            </p>
-          </div>
-          <router-link
-            :to="{
-              name: 'article-editor',
-              params: { slug: this.$route.params.slug },
-            }"
-          >
-            <button class="btn btn-outline-primary mx-2">article edit</button>
-          </router-link>
-
-          <button
-            class="btn btn-outline-danger"
-            @click="deleteArticle($store.state.article.article.slug)"
-          >
-            delete article
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="article__body">{{ $store.state.article.article.body }}</div>
-      <div class="d-flex justify-content-center my-5">
-        <div class="article__info-group">
-          <img
-            :src="$store.state.article.article.author.image"
-            alt="user-image"
-            class="article__user-image"
-          />
-          <div class="article__info">
-            <h6 class="article__username article__username-green">
-              {{ $store.state.article.article.author.username }}
-            </h6>
-            <p class="article__created-at">
-              {{ $store.state.article.article.createdAt }}
-            </p>
-          </div>
-
-          <router-link
-            :to="{
-              name: 'article-editor',
-              params: { slug: this.$route.params.slug },
-            }"
-          >
-            <button class="btn btn-outline-primary mx-2">article edit</button>
-          </router-link>
-
-          <button
-            class="btn btn-outline-danger"
-            @click="deleteArticle($store.state.article.article.slug)"
-          >
-            delete article
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-lg-6 col-6 mx-auto">
-          <form action="post" @submit.prevent="postComment">
-            <div class="mt-3">
-              <textarea
-                class="form-control"
-                rows="3"
-                placeholder="Comment..."
-                v-model="body"
-              ></textarea>
+  <div class="">
+    <BSpinner v-if="$store.state.article.isLoading" />
+    <div
+      class="article"
+      v-if="Object.keys($store.state.article.article).length"
+    >
+      <div class="article__header">
+        <div class="container">
+          <h1 class="article__title">
+            {{ $store.state.article.article.title }}
+          </h1>
+          <div class="article__info-group">
+            <img
+              :src="$store.state.article.article.author.image"
+              alt="user-image"
+              class="article__user-image"
+            />
+            <div class="article__info">
+              <h6 class="article__username">
+                {{ $store.state.article.article.author.username }}
+              </h6>
+              <p class="article__created-at">
+                {{ $store.state.article.article.createdAt }}
+              </p>
             </div>
-            <div class="text-end mt-5">
-              <button type="submit" class="btn btn-outline-primary px-5">
-                Post comment
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+            <router-link
+              :to="{
+                name: 'article-editor',
+                params: { slug: this.$route.params.slug },
+              }"
+            >
+              <button class="btn btn-outline-primary mx-2">article edit</button>
+            </router-link>
 
-      <div class="row" v-if="$store.state.article.comments.length">
-        <div class="col-md-6 col-lg-6 col-6 mx-auto">
-          <div
-            class="article-comment"
-            v-for="commentItem in $store.state.article.comments"
-            :key="commentItem.id"
-          >
-            <p class="article-comment__body">{{ commentItem.body }}</p>
-            <div class="article-comment__footer">
-              <div class="aticle-comment__info-group">
-                <img
-                  :src="commentItem.author.image"
-                  alt=""
-                  class="article-comment__image"
-                />
-                <p class="article-comment__username">
-                  {{ commentItem.author.username }}
-                </p>
-                <p class="article-comment__created-at">
-                  {{ commentItem.createdAt }}
-                </p>
-              </div>
-              <i
-                class="material-icons article-comment__delete"
-                @click="deleteComment(commentItem.id)"
-                >delete</i
+            <button
+              class="btn btn-outline-danger"
+              @click="deleteArticle($store.state.article.article.slug)"
+            >
+              delete article
+            </button>
+          </div>
+          <template v-if="$store.state.article.article.tagList">
+            <div class="article-tag__tags-wrapper">
+              <div
+                class="article-tag__tags"
+                v-for="tag in $store.state.article.article.tagList"
+                :key="tag"
               >
+                <div class="article-tag__tag">
+                  {{ tag }}
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+      <div class="container">
+        <div class="article__body">{{ $store.state.article.article.body }}</div>
+        <div class="d-flex justify-content-center my-5">
+          <div class="article__info-group">
+            <img
+              :src="$store.state.article.article.author.image"
+              alt="user-image"
+              class="article__user-image"
+            />
+            <div class="article__info">
+              <h6 class="article__username article__username-green">
+                {{ $store.state.article.article.author.username }}
+              </h6>
+              <p class="article__created-at">
+                {{ $store.state.article.article.createdAt }}
+              </p>
+            </div>
+
+            <router-link
+              :to="{
+                name: 'article-editor',
+                params: { slug: this.$route.params.slug },
+              }"
+            >
+              <button class="btn btn-outline-primary mx-2">article edit</button>
+            </router-link>
+
+            <button
+              class="btn btn-outline-danger"
+              @click="deleteArticle($store.state.article.article.slug)"
+            >
+              delete article
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9 col-lg-9 col-9 mx-auto">
+            <form action="post" @submit.prevent="postComment">
+              <div class="mt-3">
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Comment..."
+                  v-model="body"
+                ></textarea>
+              </div>
+              <div class="text-end mt-5">
+                <button type="submit" class="btn btn-outline-primary px-5">
+                  Post comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row" v-if="$store.state.article.comments.length">
+          <div class="col-md-9 col-lg-9 col-9 mx-auto">
+            <div
+              class="article-comment"
+              v-for="commentItem in $store.state.article.comments"
+              :key="commentItem.id"
+            >
+              <p class="article-comment__body">{{ commentItem.body }}</p>
+              <div class="article-comment__footer">
+                <div class="aticle-comment__info-group">
+                  <img
+                    :src="commentItem.author.image"
+                    alt=""
+                    class="article-comment__image"
+                  />
+                  <p class="article-comment__username">
+                    {{ commentItem.author.username }}
+                  </p>
+                  <p class="article-comment__created-at">
+                    {{ commentItem.createdAt }}
+                  </p>
+                </div>
+                <i
+                  class="material-icons article-comment__delete"
+                  @click="deleteComment(commentItem.id)"
+                  >delete</i
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -126,6 +147,7 @@
 </template>
 
 <script>
+import BSpinner from "@/components/spinner/bSpinner.vue";
 export default {
   data() {
     return {
@@ -147,6 +169,7 @@ export default {
         .then(() => {
           this.$store.dispatch("getComments", this.$route.params.slug);
         });
+      this.body = "";
     },
     deleteComment(id) {
       this.$store.dispatch("deleteComment", {
@@ -160,6 +183,7 @@ export default {
         .then(() => this.$router.push({ name: "main-feed" }));
     },
   },
+  components: { BSpinner },
 };
 </script>
 
@@ -176,6 +200,7 @@ export default {
   font-weight: 600;
 }
 .article__info-group {
+  padding-top: 20px;
   display: flex;
 }
 .article__user-image {
@@ -259,5 +284,21 @@ export default {
   width: 11px;
   height: 16px;
   cursor: pointer;
+}
+
+.article-tag__tags {
+  padding: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: rgb(208, 208, 208);
+  display: inline-block;
+}
+
+.article-tag__tags-wrapper {
+  display: block;
+}
+.article-tag__tag {
+  color: #fff;
 }
 </style>

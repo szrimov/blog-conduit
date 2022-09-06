@@ -1,5 +1,5 @@
 <template>
-  <div class="user-feed">
+  <div class="user-feed" v-if="$store.state.userFeed.articles.length">
     <BFeedItem
       v-for="article in $store.state.userFeed.articles"
       :key="article.createdAt"
@@ -25,8 +25,13 @@
 </template>
 
 <script>
-import BFeedItem from "../feedItem/bFeedItem.vue";
+import { mapGetters } from "vuex";
+import BFeedItem from "@/components/feedItem/bFeedItem.vue";
 export default {
+  data() {
+    return {};
+  },
+
   methods: {
     getArticlesFromUserFeed(page) {
       this.$store.dispatch("getUserFeed", page);
@@ -41,6 +46,9 @@ export default {
     this.$store.dispatch("getUserFeed");
   },
   components: { BFeedItem },
+  computed: {
+    ...mapGetters(["articles, isLoading"]),
+  },
 };
 </script>
 

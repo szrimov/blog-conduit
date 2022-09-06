@@ -1,5 +1,5 @@
 <template>
-  <div class="global-feed">
+  <div class="global-feed" v-if="$store.state.globalFeed.articles.length">
     <BFeedItem
       v-for="article in $store.state.globalFeed.articles"
       :key="article.createdAt"

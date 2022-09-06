@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="global-feed-item__right-group">
-      <div class="global-feed-item__favorite">
+      <div class="global-feed-item__favorite d-flex justify-content-end">
         <button
           class="btn btn-secondary btn-sm d-flex align-items-center justify-content-evenly"
           :class="{ 'btn-danger': article.favorited }"
@@ -162,13 +162,16 @@ export default {
 }
 
 .global-feed-item__tags {
-  padding: 10px;
-  margin-right: 10px;
+  padding: 5px;
+  margin-left: 10px;
   margin-top: 10px;
   border-radius: 5px;
   background: rgb(208, 208, 208);
   display: inline-block;
   cursor: pointer;
+}
+.global-feed-item__tags:hover {
+  background: #818a91;
 }
 .global-feed-item__tags-wrapper {
   display: flex;
@@ -176,7 +179,6 @@ export default {
   align-items: center;
 }
 .global-feed-item__tag {
-  margin-right: 10px;
 }
 .global-feed-item__tag a {
   color: #fff;

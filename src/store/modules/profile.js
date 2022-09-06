@@ -86,8 +86,15 @@ const actions = {
   },
 };
 
+const getters = {
+  profile(state) {
+    return state.profile;
+  },
+};
+
 export default {
   state,
   mutations,
   actions,
+  getters,
 };

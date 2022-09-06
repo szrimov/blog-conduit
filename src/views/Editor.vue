@@ -97,7 +97,8 @@ export default {
         });
     },
     addTag() {
-      if (!this.tags.includes(this.tag)) this.tags.push(this.tag);
+      if (!this.tags.includes(this.tag) && this.tag.trim() !== "")
+        this.tags.push(this.tag.trim());
       this.tag = "";
     },
     removeTag(tag) {
