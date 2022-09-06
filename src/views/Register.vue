@@ -1,54 +1,36 @@
 <template>
   <section class="register">
     <div class="container">
-      <div class="row align-items-center auth-form">
-        <div class="col-md-6 col-lg-4 col-6 mx-auto">
+      <div class="row mt-5 auth-form">
+        <div class="col-md-6 col-lg-6 col-6 mx-auto">
           <div class="text-center">
             <h1 class="fs-1">Sign up</h1>
-            <router-link :to="{ name: 'login' }"
-              ><p class="fs-6">Have an account?</p></router-link
-            >
+            <router-link :to="{ name: 'login' }">
+              <p class="fs-6">Have an account?</p>
+            </router-link>
           </div>
-          <BValidationErrors
-            v-if="$store.state.auth.validationsError"
-            :validationsError="$store.state.auth.validationsError"
-          />
+          <BValidationErrors v-if="$store.state.auth.validationsError"
+            :validationsError="$store.state.auth.validationsError" />
           <form @submit.prevent="onSubmit">
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
-              <input
-                type="text"
-                class="form-control"
-                :class="{
-                  'is-valid':
-                    $v.username.required &&
-                    $v.username.minLength &&
-                    $v.username.maxLength,
-                  'is-invalid': $v.username.$dirty && $v.username.$invalid,
-                }"
-                id="username"
-                v-model="username"
-                @blur="$v.username.$touch()"
-                @focus="resetValidationsError"
-              />
+              <input type="text" class="form-control" :class="{
+                'is-valid':
+                  $v.username.required &&
+                  $v.username.minLength &&
+                  $v.username.maxLength,
+                'is-invalid': $v.username.$dirty && $v.username.$invalid,
+              }" id="username" v-model="username" @blur="$v.username.$touch()" @focus="resetValidationsError" />
               <div class="invalid-feedback" v-if="!$v.username.required">
                 Обязательное поле для заполнения
               </div>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                v-model="email"
-                :class="{
-                  'is-valid': $v.email.required && $v.email.email,
-                  'is-invalid': $v.email.$dirty && $v.email.$invalid,
-                }"
-                @blur="$v.email.$touch()"
-                @focus="resetValidationsError"
-              />
+              <input type="email" class="form-control" id="email" v-model="email" :class="{
+                'is-valid': $v.email.required && $v.email.email,
+                'is-invalid': $v.email.$dirty && $v.email.$invalid,
+              }" @blur="$v.email.$touch()" @focus="resetValidationsError" />
               <div class="invalid-feedback" v-if="!$v.email.required">
                 Обязательное поле для заполнения
               </div>
@@ -58,21 +40,13 @@
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                v-model="password"
-                :class="{
-                  'is-valid':
-                    $v.password.required &&
-                    $v.password.minLength &&
-                    $v.password.maxLength,
-                  'is-invalid': $v.password.$dirty && $v.password.$invalid,
-                }"
-                @blur="$v.password.$touch()"
-                @focus="resetValidationsError"
-              />
+              <input type="password" class="form-control" id="password" v-model="password" :class="{
+                'is-valid':
+                  $v.password.required &&
+                  $v.password.minLength &&
+                  $v.password.maxLength,
+                'is-invalid': $v.password.$dirty && $v.password.$invalid,
+              }" @blur="$v.password.$touch()" @focus="resetValidationsError" />
               <div class="invalid-feedback" v-if="!$v.password.required">
                 Обязательное поле для заполнения
               </div>
@@ -84,15 +58,11 @@
               </div>
             </div>
             <div class="text-end">
-              <button
-                type="submit"
-                class="btn btn-primary px-4"
-                :disabled="
-                  $store.state.auth.isSubmitting ||
-                  validForm ||
-                  $store.state.auth.validationsError
-                "
-              >
+              <button type="submit" class="btn btn-primary px-4" :disabled="
+                $store.state.auth.isSubmitting ||
+                validForm ||
+                $store.state.auth.validationsError
+              ">
                 Sign up
               </button>
             </div>
@@ -158,7 +128,7 @@ export default {
       });
     },
   },
-  mounted() {},
+  mounted() { },
   computed: {
     validForm() {
       return (
