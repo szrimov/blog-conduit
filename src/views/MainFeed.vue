@@ -17,8 +17,8 @@
             </div>
           </div>
           <template class="global-feed" v-if="$store.state.auth.isLoggedIn">
-            <BUserFeed v-if="buttonId === 1" />
-            <BGlobalFeed v-if="buttonId === 2" />
+            <BGlobalFeed v-if="buttonId === 1" />
+            <BUserFeed v-if="buttonId === 2" />
             <BTagsFeed v-if="buttonId === 3" />
           </template>
           <template class="global-feed" v-else>
@@ -46,9 +46,9 @@ export default {
       page: 1,
       tag: "",
       buttons: [
-        { name: "Интересное", id: 1, active: true, visible: true },
+        { name: "Все посты", id: 1, active: true, visible: true },
         {
-          name: "Все посты",
+          name: "Интересное",
           id: 2,
           active: false,
           visible: true,

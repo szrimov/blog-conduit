@@ -16,6 +16,26 @@ const mutations = {
   getArticleFailure(state) {
     state.isLoading = false;
   },
+  postArticleStart(state) {
+    state.isLoading = true;
+  },
+  postArticleSuccess(state, payload) {
+    state.isLoading = false;
+    state.article = payload;
+  },
+  postArticleFailure(state) {
+    state.isLoading = false;
+  },
+  putArticleStart(state) {
+    state.isLoading = true;
+  },
+  putArticleSuccess(state, payload) {
+    state.isLoading = false;
+    state.article = payload;
+  },
+  putArticleFailure(state) {
+    state.isLoading = false;
+  },
   postCommentStart(state) {
     state.isLoading = true;
   },
@@ -26,7 +46,6 @@ const mutations = {
   postCommentFailure(state) {
     state.isLoading = false;
   },
-
   getCommentsStart(state) {
     state.isLoading = true;
   },
@@ -37,7 +56,6 @@ const mutations = {
   getCommentsFailure(state) {
     state.isLoading = false;
   },
-
   deleteCommentStart(state) {
     state.isLoading = true;
   },
@@ -71,6 +89,38 @@ const actions = {
         })
         .catch((result) => {
           commit('getArticleFailure', result.response.data);
+        });
+    });
+  },
+  postArticle({ commit }, { article }) {
+    commit('postArticleStart');
+    return new Promise((resolve) => {
+      api
+        .postArticle(article)
+        .then((response) => {
+          commit('postArticleSuccess', response.data.article);
+          resolve(response.data.article);
+        })
+        .catch((result) => {
+          commit('postArticleFailure');
+
+          console.log('errors from editor', result.response.data);
+        });
+    });
+  },
+  putArticle({ commit }, { slug, article }) {
+    commit('putArticleStart');
+    return new Promise((resolve) => {
+      api
+        .putArticle(slug, article)
+        .then((response) => {
+          commit('putArticleSuccess', response.data.article);
+          resolve(response.data.article);
+        })
+        .catch((result) => {
+          commit('putArticleFailure');
+
+          console.log('errors from editor', result.response.data);
         });
     });
   },

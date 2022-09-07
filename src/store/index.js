@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import auth from '@/store/modules/auth';
 import globalFeed from '@/store/modules/globalFeed';
 import userFeed from '@/store/modules/userFeed';
-import editor from '@/store/modules/editor';
 import updateSettings from '@/store/modules/updateSettings';
 import profileFeed from '@/store/modules/profileFeed';
 import profile from '@/store/modules/profile';
@@ -21,7 +20,6 @@ export default new Vuex.Store({
     auth,
     globalFeed,
     userFeed,
-    editor,
     updateSettings,
     profileFeed,
     profile,

@@ -56,10 +56,12 @@ export default {
     onSubmit() {
       this.$store
         .dispatch("postArticle", {
-          title: this.title,
-          description: this.description,
-          body: this.body,
-          tagList: this.tags,
+          article: {
+            title: this.title,
+            description: this.description,
+            body: this.body,
+            tagList: this.tags,
+          }
         })
         .then(() => {
           this.$router.push({ name: "main-feed" });

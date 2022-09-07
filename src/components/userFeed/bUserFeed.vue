@@ -13,7 +13,8 @@
 
     <div class="feed-empty text-center"
       v-if="$store.state.userFeed.articles !== null && $store.state.userFeed.articles.length === 0 ">
-      <div class="fs-4">Пусто...</div>
+      <div class="fs-4">Посты появяться после подписки на пользователей</div>
+      <div class="fs-5 mt-3">Либо создайте свой пост</div>
       <router-link :to="{name: 'editor'}">Создать</router-link>
     </div>
   </div>

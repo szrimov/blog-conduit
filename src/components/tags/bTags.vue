@@ -52,5 +52,10 @@ export default {
   margin-right: 5px;
   color: #fff;
   cursor: pointer;
+  transition: all 0.1s ease-in;
+}
+
+.tags__item:hover {
+  transform: scale(1.05);
 }
 </style>

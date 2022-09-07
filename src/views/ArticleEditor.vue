@@ -53,7 +53,7 @@ export default {
   methods: {
     onSubmit() {
       this.$store
-        .dispatch("postArticle", {
+        .dispatch("putArticle", {
           slug: this.$route.params.slug,
           article: {
             title: this.form.title,
