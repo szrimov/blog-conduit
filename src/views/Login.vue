@@ -68,7 +68,7 @@ import BValidationErrors from "@/components/bValidationErrors/bValidationErrors.
 
 export default {
   data() {
-    return { email: "", password: "" };
+    return { email: "test-blog@test-blog.test-blog", password: "test-blog" };
   },
   validations: {
     email: {

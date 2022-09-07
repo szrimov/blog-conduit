@@ -4,12 +4,13 @@
 
 <pre>
 - Vue: 
+    - Авторизация (access token)
     - Для HTTP-запросов - axios (CRUD)
     - Валидация форм - vuelidate
     - Пагинация - vuejs-paginate
     - Роутинг - vue-router 
     - Иконки - material-design-icons-iconfont
-    - Управление состоянием через vuex
+    - Управление состоянием - vuex
 - SCSS
 - БЭМ (опционально), bootstrap
 - Адаптивная верстка</pre>
