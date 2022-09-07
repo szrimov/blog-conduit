@@ -12,6 +12,6 @@
     - Иконки - material-design-icons-iconfont
     - Управление состоянием - vuex
 - SCSS
-- БЭМ (опционально), bootstrap
+- БЭМ, bootstrap
 - Адаптивная верстка</pre>
 <pre><img src="./presentation/blog.gif"/></pre>
