@@ -1,4 +1,4 @@
-import login from "@/api/login";
+import login from '@/api/login';
 
 const state = {
   isSubmitting: false,
@@ -26,17 +26,16 @@ const mutations = {
 const actions = {
   login({ commit }, credentials) {
     return new Promise((resolve) => {
-      commit("loginStart");
+      commit('loginStart');
       login
         .login(credentials)
         .then((response) => {
-          commit("loginSuccess", response.data.user);
-          console.log(response);
+          commit('loginSuccess', response.data.user);
           resolve(response);
         })
         .catch((result) => {
-          commit("loginFailure", result.response.data.errors);
-          console.log(result.response.data.errors);
+          commit('loginFailure', result.response.data.errors);
+          console.log('errors from login', result.response.data.errors);
         });
     });
   },

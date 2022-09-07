@@ -1,5 +1,5 @@
-import auth from "@/api/auth";
-import { setItem } from "@/helpers/percistanceStorage";
+import api from '@/api/auth';
+import { setItem } from '@/helpers/percistanceStorage';
 
 const state = {
   isSubmitting: false,
@@ -41,6 +41,7 @@ const mutations = {
   },
   getCurrentUserStart(state) {
     state.isLoading = true;
+    state.isLoggedIn = null;
   },
   getCurrentUserSuccess(state, payload) {
     state.currentUser = payload;
@@ -50,7 +51,7 @@ const mutations = {
   getCurrentUserFailure(state, payload) {
     state.validationsError = payload;
     state.isLoading = false;
-    state.isLoggedIn = null;
+    state.isLoggedIn = false;
   },
   logout(state) {
     state.isLoading = false;
@@ -61,55 +62,57 @@ const mutations = {
 const actions = {
   register({ commit }, credentials) {
     return new Promise((resolve) => {
-      commit("registerStart");
-      auth
+      commit('registerStart');
+      api
         .register(credentials)
         .then((response) => {
-          commit("registerSuccess", response.data.user);
-          setItem("accessToken", response.data.user.token);
-          resolve(response.data.user);
+          commit('registerSuccess', response.data.user);
+          setItem('accessToken', response.data.user.token);
+          resolve();
         })
         .catch((result) => {
-          commit("registerFailure", result.response.data.errors);
+          commit('registerFailure', result.response.data.errors);
+          reject();
         });
     });
   },
 
   login({ commit }, credentials) {
     return new Promise((resolve) => {
-      commit("loginStart");
-      auth
+      commit('loginStart');
+      api
         .login(credentials)
         .then((response) => {
-          commit("loginSuccess", response.data.user);
-          setItem("accessToken", response.data.user.token);
+          commit('loginSuccess', response.data.user);
+          setItem('accessToken', response.data.user.token);
           resolve(response.data.user);
         })
         .catch((result) => {
-          commit("loginFauilure", result.response.data.user.errors);
+          commit('loginFauilure', result.response.data.user.errors);
+          reject();
         });
     });
   },
 
   getCurrentUser({ commit }) {
-    return new Promise((resolve) => {
-      commit("getCurrentUserStart");
-      auth
+    return new Promise((resolve, reject) => {
+      commit('getCurrentUserStart');
+      api
         .getCurrentUser()
         .then((response) => {
-          console.log("===>", response);
-          commit("getCurrentUserSuccess", response.data.user);
-          resolve(response.data.user);
+          commit('getCurrentUserSuccess', response.data.user);
+          resolve();
         })
         .catch((result) => {
-          commit("getCurrentUserFailure", result.response.data.errors);
+          commit('getCurrentUserFailure', result.response.data.errors);
+          reject();
         });
     });
   },
   logout({ commit }) {
     return new Promise((resolve) => {
-      setItem("accessToken", "");
-      commit("logout");
+      setItem('accessToken', '');
+      commit('logout');
       resolve();
     });
   },

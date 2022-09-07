@@ -6,17 +6,19 @@
 </template>
 
 <script>
-import BHeader from "./components/header/bHeader.vue";
+import BHeader from "@/components/header/bHeader.vue";
+
 export default {
   components: { BHeader },
-  data() {
-    return {};
-  },
-
   mounted() {
-    this.$store.dispatch("getCurrentUser");
+    this.$store.dispatch("getCurrentUser")
+      .catch(() => {
+        if (!this.$store.state.auth.isLoggedIn) this.$router.push({ name: 'login' });
+      });
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+</style>

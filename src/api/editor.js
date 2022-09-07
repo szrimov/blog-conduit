@@ -1,8 +1,8 @@
-import axios from "@/api/axios";
+import axios from '@/api/axios';
 
 const api = {
-  postArticle(article) {
-    return axios.post("/articles", { article: article });
+  postArticle(slug, article) {
+    return axios.put(`/articles/${slug}`, { article: article });
   },
 };
 

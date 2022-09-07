@@ -1,23 +1,21 @@
-import axios from "@/api/axios";
+import axios from '@/api/axios';
 
-const register = (credentials) => {
-  return axios.post("/users", {
-    user: credentials,
-  });
+const api = {
+  register(credentials) {
+    return axios.post('/users', {
+      user: credentials,
+    });
+  },
+
+  login(credentials) {
+    return axios.post('/users/login', {
+      user: credentials,
+    });
+  },
+
+  getCurrentUser() {
+    return axios.get('/user');
+  },
 };
 
-const login = (credentials) => {
-  return axios.post("/users/login", {
-    user: credentials,
-  });
-};
-
-const getCurrentUser = () => {
-  return axios.get("/user");
-};
-
-export default {
-  register,
-  login,
-  getCurrentUser,
-};
+export default api;

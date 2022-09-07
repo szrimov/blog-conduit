@@ -1,23 +1,17 @@
 <template>
-  <div class="">
-    <BSpinner
-      v-if="
-        $store.state.userFeed.isLoading ||
-        $store.state.globalFeed.isLoading ||
-        $store.state.tags.isLoading
-      "
-    />
+  <div class="main-feed" v-if="$store.state.auth.isLoggedIn">
+    <BSpinner v-if="
+      $store.state.userFeed.isLoading ||
+      $store.state.globalFeed.isLoading ||
+      $store.state.tags.isLoading
+    " />
     <div class="global-container">
-      <div class="main-feed">
-        <div class="container mt-5">
+      <div class="main-feed__inner">
+        <div class="main-feed__header-inner">
           <div class="main-feed__header">
-            <div class="btn" v-for="button in buttons" :key="button.id">
-              <button
-                v-if="button.visible"
-                class="global-feed__btn feed-btn"
-                :class="{ 'global-feed__btn-active': button.active }"
-                @click="setActive(button.id)"
-              >
+            <div class="main-feed__header-btn" v-for="button in buttons" :key="button.id">
+              <button v-if="button.visible " class="global-feed__btn feed-btn"
+                :class="{ 'global-feed__btn-active': button.active }" @click="setActive(button.id)">
                 {{ button.name }}
               </button>
             </div>
@@ -44,6 +38,7 @@ import BPagination from "@/components/pagination/bPagination.vue";
 import BTags from "@/components/tags/bTags.vue";
 import BTagsFeed from "@/components/tagsFeed/bTagsFeed.vue";
 import BSpinner from "@/components/spinner/bSpinner.vue";
+import Login from "./Login.vue";
 
 export default {
   data() {
@@ -51,20 +46,21 @@ export default {
       page: 1,
       tag: "",
       buttons: [
-        { name: "Your feed", id: 1, active: true, visible: true },
+        { name: "Интересное", id: 1, active: true, visible: true },
         {
-          name: "Global feed",
+          name: "Все посты",
           id: 2,
           active: false,
           visible: true,
         },
         {
-          name: "Tags feed",
+          name: "Тэги",
           id: 3,
           active: false,
           visible: false,
         },
       ],
+
       buttonId: 1,
     };
   },
@@ -75,6 +71,7 @@ export default {
     BTags,
     BTagsFeed,
     BSpinner,
+    Login,
   },
   methods: {
     setTag(tag) {
@@ -105,36 +102,89 @@ export default {
       });
     },
   },
-
-  computed: {},
-  mounted() {},
 };
 </script>
 
 <style lang="scss">
 .main-feed {
+  margin-top: 120px;
+
+}
+
+.main-feed__inner {
   position: relative;
+  display: flex;
+  justify-content: space-evenly;
 }
-.main-feed__header {
+
+@media screen and (max-width: 575px) {
+  .tags {
+    min-width: 100%;
+  }
+
+  .header__nav-items {
+    display: none;
+  }
+
+  .header__nav-items-burger {
+    display: block;
+  }
+
+  .main-feed__inner {
+    flex-wrap: wrap-reverse;
+  }
+
+  .global-feed-item {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .profile__link .btn {
+    margin-top: 20px;
+  }
+}
+
+.main-feed__header-inner {
+  text-align: center;
   width: 100%;
-  border-bottom: 1px solid silver;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
+
+.main-feed__header {
+  padding-bottom: 20px;
+  width: calc(100% - 20px);
+}
+
 .feed-btn {
   border: none;
   background: none;
-  padding-bottom: 5px;
   color: #aaa;
 }
-.global-feed__btn-active {
-  color: #5cb85c;
-  border-bottom: 2px solid #5cb85c;
+
+.main-feed__header-btn {
+  display: inline-block;
 }
 
-.user-feed__btn {
-}
 .global-feed__btn {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 10px 20px;
+  color: #818a91;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
 }
-.pagination-active {
-  color: red;
+
+.global-feed__btn-active {
+  padding: 10px 20px;
+  color: #818a91;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
 }
 </style>

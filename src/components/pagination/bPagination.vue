@@ -3,13 +3,12 @@
     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
     <li class="page-item" v-for="page in this.pages" :key="page">
       <router-link :to="{ name: 'main-feed' }" class="page-link" href="#">{{
-        page
+      page
       }}</router-link>
     </li>
     <li class="page-item"><a class="page-link" href="#">Next</a></li>
   </ul>
 </template>
-
 <script>
 import { range } from "@/helpers/utils";
 export default {
@@ -40,4 +39,6 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+</style>

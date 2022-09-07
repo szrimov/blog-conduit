@@ -1,4 +1,4 @@
-import api from "@/api/settings";
+import api from '@/api/settings';
 
 const state = {
   user: {},
@@ -19,16 +19,16 @@ const mutations = {
 const actions = {
   updateSettings({ commit }, user) {
     return new Promise((resolve) => {
-      commit("updateSettingsStart");
+      commit('updateSettingsStart');
       api
         .updateSettings(user)
         .then((response) => {
-          commit("updateSettingsSuccess", response.data.user);
+          commit('updateSettingsSuccess', response.data.user);
           resolve(response.data.user);
         })
         .catch((result) => {
-          console.log("errors from update settings ==>", result.response.data);
-          commit("updateSettingsFailure");
+          console.log('errors from update settings', result.response.data);
+          commit('updateSettingsFailure');
         });
     });
   },

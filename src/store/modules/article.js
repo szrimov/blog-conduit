@@ -1,4 +1,4 @@
-import api from "@/api/article";
+import api from '@/api/article';
 
 const state = {
   article: {},
@@ -20,7 +20,6 @@ const mutations = {
     state.isLoading = true;
   },
   postCommentSuccess(state, payload) {
-    console.log("payload", payload);
     state.isLoading = false;
     state.comments.push(payload);
   },
@@ -63,79 +62,75 @@ const mutations = {
 const actions = {
   getArticle({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("getArticleStart");
+      commit('getArticleStart');
       api
         .getArticle(slug)
         .then((response) => {
-          commit("getArticleSuccess", response.data.article);
+          commit('getArticleSuccess', response.data.article);
           resolve(response.data.article);
         })
         .catch((result) => {
-          commit("getArticleFailure", result.response.data);
-          console.log("errors from article");
+          commit('getArticleFailure', result.response.data);
         });
     });
   },
   postComment({ commit }, data) {
     return new Promise((resolve) => {
-      commit("postCommentStart");
+      commit('postCommentStart');
       api
         .postComment(data)
         .then((response) => {
-          commit("postCommentSuccess", response.data.comment);
+          commit('postCommentSuccess', response.data.comment);
           resolve();
         })
         .catch((result) => {
-          commit("postCommentFailure");
-          console.log("errors from comment ==>", result.response.data);
+          commit('postCommentFailure');
+          console.log('errors from comment', result.response.data);
         });
     });
   },
   getComments({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("getCommentsStart");
+      commit('getCommentsStart');
       api
         .getComments(slug)
         .then((response) => {
-          commit("getCommentsSuccess", response.data.comments);
+          commit('getCommentsSuccess', response.data.comments);
           resolve(response.data.comments);
         })
         .catch((result) => {
-          commit("getCommentsFailure");
-          console.log("errors from get comments ==>", result.response.errors);
+          commit('getCommentsFailure');
+          console.log('errors from get comments', result.response.errors);
         });
     });
   },
   deleteComment({ commit }, data) {
     return new Promise((resolve) => {
-      commit("deleteCommentStart");
+      commit('deleteCommentStart');
       api
         .deleteComment(data)
         .then((response) => {
-          commit("deleteCommentSuccess", data);
+          commit('deleteCommentSuccess', data);
         })
         .catch((result) => {
-          commit("deleteCommentFailure");
-          console.log(
-            "errors from delete comments ==>",
-            result.response.errors
-          );
+          commit('deleteCommentFailure');
+          console.log('errors from delete comments', result.response.errors);
         });
     });
   },
 
   deleteArticle({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("deleteArticleStart");
+      commit('deleteArticleStart');
       api
         .deleteArticle(slug)
         .then((response) => {
-          commit("deleteArticleSuccess");
+          commit('deleteArticleSuccess');
           resolve();
         })
         .catch((result) => {
-          commit("deleteArticleFailure");
-          console.log("errors from delete article ==>", result.response.errors);
+          commit('deleteArticleFailure');
+          console.log('errors from delete article', result.response.errors);
         });
     });
   },

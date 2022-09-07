@@ -1,7 +1,7 @@
-import api from "@/api/userFeed";
+import api from '@/api/userFeed';
 
 const state = {
-  articles: [],
+  articles: null,
   isLoading: false,
 };
 const mutations = {
@@ -14,6 +14,7 @@ const mutations = {
   },
   getUserFeedFailure(state) {
     state.isLoading = false;
+    state.articles = [];
   },
   postUserFeedFavoritedStart(state) {
     state.isLoading = true;
@@ -50,34 +51,33 @@ const mutations = {
 };
 const actions = {
   getUserFeed({ commit }, page) {
-    commit("getUserFeedStart");
+    commit('getUserFeedStart');
     return new Promise((resolve) => {
       api
         .getUserFeed(page)
         .then((response) => {
-          console.log("user-feed ==>", response.data.articles);
-          commit("getUserFeedStuccess", response.data.articles);
+          commit('getUserFeedStuccess', response.data.articles);
           resolve(response.data.articles);
         })
         .catch((result) => {
-          commit("getUserFeedFailure");
-          console.log("errors from userFeed ==>", result.response);
+          commit('getUserFeedFailure');
+          console.log('errors from userFeed', result.response);
         });
     });
   },
 
   postUserFeedFavorited({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("postUserFeedFavoritedStart");
+      commit('postUserFeedFavoritedStart');
       api
         .postFavorite(slug)
         .then((response) => {
-          commit("postUserFeedFavoritedSuccess", response.data.article);
+          commit('postUserFeedFavoritedSuccess', response.data.article);
         })
         .catch((result) => {
-          commit("postUserFeedFavoritedFailure");
+          commit('postUserFeedFavoritedFailure');
           console.log(
-            "errors from postUserFeedFavorited",
+            'errors from postUserFeedFavorited',
             result.response.data
           );
         });
@@ -86,16 +86,16 @@ const actions = {
 
   deleteUserFeedFavorited({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("deleteUserFeedFavoritedStart");
+      commit('deleteUserFeedFavoritedStart');
       api
         .deleteFavorite(slug)
         .then((response) => {
-          commit("deleteUserFeedFavoritedSuccess", response.data.article);
+          commit('deleteUserFeedFavoritedSuccess', response.data.article);
         })
         .catch((result) => {
-          commit("deleteUserFeedFavoritedFailure");
+          commit('deleteUserFeedFavoritedFailure');
           console.log(
-            "errors from deleteUserFeedFavorited",
+            'errors from deleteUserFeedFavorited',
             result.response.data
           );
         });

@@ -1,7 +1,7 @@
-import api from "@/api/profileFeed";
+import api from '@/api/profileFeed';
 
 const state = {
-  articles: [],
+  articles: null,
   isLoading: false,
 };
 const mutations = {
@@ -14,6 +14,7 @@ const mutations = {
   },
   getProfileAuthorFeedFailure(state) {
     state.isLoading = false;
+    state.articles = [];
   },
   getProfileFavoritedFeedStart(state) {
     state.isLoading = true;
@@ -24,6 +25,7 @@ const mutations = {
   },
   getProfileFavoritedFeedFailure(state) {
     state.isLoading = false;
+    state.articles = [];
   },
 
   postProfileFavoritedStart(state) {
@@ -75,17 +77,17 @@ const mutations = {
 const actions = {
   getProfileAuthorFeed({ commit }, { slug, page }) {
     return new Promise((resolve) => {
-      commit("getProfileAuthorFeedStart");
+      commit('getProfileAuthorFeedStart');
       api
         .getAuthorFeed(slug, page)
         .then((response) => {
-          commit("getProfileAuthorFeedSuccess", response.data.articles);
+          commit('getProfileAuthorFeedSuccess', response.data.articles);
           resolve(response.data.articles);
         })
         .catch((result) => {
-          commit("getProfileAuthorFeedFailure");
+          commit('getProfileAuthorFeedFailure');
           console.log(
-            "errrors from getProfileAuthorFeed",
+            'errrors from getProfileAuthorFeed',
             result.response.data
           );
         });
@@ -93,17 +95,17 @@ const actions = {
   },
   getProfileFavoritedFeed({ commit }, { slug, page }) {
     return new Promise((resolve) => {
-      commit("getProfileFavoritedFeedStart");
+      commit('getProfileFavoritedFeedStart');
       api
         .getFavoritedFeed(slug, page)
         .then((response) => {
-          commit("getProfileFavoritedFeedSuccess", response.data.articles);
+          commit('getProfileFavoritedFeedSuccess', response.data.articles);
           resolve(response.data.articles);
         })
         .catch((result) => {
-          commit("getProfileFavoritedFeedFailure");
+          commit('getProfileFavoritedFeedFailure');
           console.log(
-            "errrors from getProfileFavoritedFeed",
+            'errrors from getProfileFavoritedFeed',
             result.response.data
           );
         });
@@ -111,30 +113,30 @@ const actions = {
   },
   postProfileFavorited({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("postProfileFavoritedStart");
+      commit('postProfileFavoritedStart');
       api
         .postFavorite(slug)
         .then((response) => {
-          commit("postProfileFavoritedSuccess", response.data.article);
+          commit('postProfileFavoritedSuccess', response.data.article);
         })
         .catch((result) => {
-          commit("postProfileFavoritedFailure");
-          console.log("errors from postProfileFavorited", result.response.data);
+          commit('postProfileFavoritedFailure');
+          console.log('errors from postProfileFavorited', result.response.data);
         });
     });
   },
   deleteProfileFavorited({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("deleteProfileFavoritedStart");
+      commit('deleteProfileFavoritedStart');
       api
         .deleteFavorite(slug)
         .then((response) => {
-          commit("deleteProfileFavoritedSuccess", response.data.article);
+          commit('deleteProfileFavoritedSuccess', response.data.article);
         })
         .catch((result) => {
-          commit("deleteProfileFavoritedFailure");
+          commit('deleteProfileFavoritedFailure');
           console.log(
-            "errors from deleteProfileFavoritedFailure",
+            'errors from deleteProfileFavoritedFailure',
             result.response.data
           );
         });
@@ -143,31 +145,31 @@ const actions = {
 
   postProfileUserFavorited({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("postProfileFavoritedStart");
+      commit('postProfileFavoritedStart');
       api
         .postFavorite(slug)
         .then((response) => {
-          commit("postProfileFavoritedSuccess", response.data.article);
+          commit('postProfileFavoritedSuccess', response.data.article);
         })
         .catch((result) => {
-          commit("postProfileFavoritedFailure");
-          console.log("errors from postProfileFavorited", result.response.data);
+          commit('postProfileFavoritedFailure');
+          console.log('errors from postProfileFavorited', result.response.data);
         });
     });
   },
 
   deleteProfileUserFavorited({ commit }, slug) {
     return new Promise((resolve) => {
-      commit("deleteProfileFavoritedStart");
+      commit('deleteProfileFavoritedStart');
       api
         .deleteFavorite(slug)
         .then((response) => {
-          commit("deleteProfileUserFavoritedSuccess", response.data.article);
+          commit('deleteProfileUserFavoritedSuccess', response.data.article);
         })
         .catch((result) => {
-          commit("deleteProfileFavoritedFailure");
+          commit('deleteProfileFavoritedFailure');
           console.log(
-            "errors from deleteProfileFavoritedFailure",
+            'errors from deleteProfileFavoritedFailure',
             result.response.data
           );
         });
