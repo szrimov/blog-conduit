@@ -142,10 +142,14 @@ export default {
   .profile__link .btn {
     margin-top: 20px;
   }
+
+  .main-feed__header-inner {
+    text-align: center;
+  }
+
 }
 
 .main-feed__header-inner {
-  text-align: center;
   width: 100%;
   display: flex;
   justify-content: center;

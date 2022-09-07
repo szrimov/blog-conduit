@@ -110,7 +110,6 @@ export default {
       this.$store.commit("resetValidationsError");
     },
     onSubmit() {
-
       this.register({
         username: this.username,
         email: this.email,
