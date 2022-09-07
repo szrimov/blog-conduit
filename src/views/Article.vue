@@ -90,7 +90,6 @@ export default {
       body: "",
     };
   },
-
   mounted() {
     this.$store.dispatch("getArticle", this.$route.params.slug);
     this.$store.dispatch("getComments", this.$route.params.slug);
@@ -128,6 +127,10 @@ export default {
   margin-top: 75px;
 }
 
+.article__inner {
+  margin-bottom: 20px;
+}
+
 .article__header {
   background: #333;
   padding: 50px 0;
@@ -135,7 +138,7 @@ export default {
 
 .article__title {
   color: #fff;
-  font-size: 2.8rem;
+  font-size: 24px;
   font-weight: 600;
 }
 
@@ -170,10 +173,9 @@ export default {
 }
 
 .article__body {
-  text-align: center;
   margin-top: 20px;
   padding: 20px;
-  height: 100px;
+  min-height: 100px;
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);

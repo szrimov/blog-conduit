@@ -21,6 +21,7 @@ export default {
 
 <style lang="scss">
 .tags-feed {
+  width: 100%;
   padding: 0 20px;
 }
 </style>

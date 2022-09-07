@@ -13,7 +13,7 @@
             :validationsError="$store.state.auth.validationsError" />
           <form @submit.prevent="onSubmit">
             <div class="mb-3 mt-5">
-              <input placeholder="имя" type="text" class="form-control" :class="{
+              <input placeholder="Имя" type="text" class="form-control" :class="{
                 'is-valid':
                   $v.username.required &&
                   $v.username.minLength &&
@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <input placeholder="почта" type="email" class="form-control" id="email" v-model="email" :class="{
+              <input placeholder="Почта" type="email" class="form-control" id="email" v-model="email" :class="{
                 'is-valid': $v.email.required && $v.email.email,
                 'is-invalid': $v.email.$dirty && $v.email.$invalid,
               }" @blur="$v.email.$touch()" @focus="resetValidationsError" />
@@ -37,7 +37,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <input placeholder="пароль" type="password" class="form-control" id="password" v-model="password" :class="{
+              <input placeholder="Пароль" type="password" class="form-control" id="password" v-model="password" :class="{
                 'is-valid':
                   $v.password.required &&
                   $v.password.minLength &&

@@ -13,7 +13,7 @@
             v-if="$store.state.auth.validationsError" />
           <form @submit.prevent="onSubmit">
             <div class="mb-3 mt-5">
-              <input placeholder="почта" type="email" class="form-control" :class="{
+              <input placeholder="Почта" type="email" class="form-control" :class="{
                 'is-valid': $v.email.required && $v.email.email,
                 'is-invalid': $v.email.$dirty && $v.email.$invalid,
               }" id="email" v-model="email" @blur="$v.email.$touch()"
@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <input placeholder="пароль" type="password" class="form-control" :class="{
+              <input placeholder="Пароль" type="password" class="form-control" :class="{
                 'is-valid':
                   $v.password.required &&
                   $v.password.minLength &&
