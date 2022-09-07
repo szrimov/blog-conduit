@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     favoriteHandler(data) {
+      console.log(data);
       this.$emit("favoriteHandler", data);
     },
   },
