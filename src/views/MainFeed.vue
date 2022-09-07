@@ -117,7 +117,43 @@ export default {
   justify-content: space-evenly;
 }
 
+@media screen and (max-width: 1199px) {}
+
+@media screen and (max-width: 991px) {
+  .global-feed-item {
+    width: 100%;
+    margin-top: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .global-feed-item {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+  }
+}
+
 @media screen and (max-width: 575px) {
+  .global-feed-item__right-group {
+    width: 100%;
+  }
+
+  .global-feed-item__tags-wrapper {
+    flex-wrap: wrap;
+  }
+
+
+  .header__nav-item,
+  .header__nav-item-login,
+  .header__nav-item-register {
+    margin-left: 0;
+  }
+
   .tags {
     min-width: 100%;
   }
@@ -192,3 +228,4 @@ export default {
 
 }
 </style>
+  
